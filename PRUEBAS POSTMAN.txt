@@ -1,0 +1,15 @@
+INSERT ORDER http://localhost:8090/neworder
+{
+    "id_user": 3,
+    "order_details":
+    [
+        {
+            "cantidad": 1, 
+            "id_product": 2
+        },
+        {
+            "cantidad": 1,
+            "id_product": 1
+        }
+    ]
+}

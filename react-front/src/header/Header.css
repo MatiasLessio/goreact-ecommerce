@@ -1,0 +1,19 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    margin-bottom: 12rem;
+    top:0; left:0; right:0;
+    padding:0.2rem;
+    z-index: 1000;
+
+}
+
+.header.active{
+    padding:2rem 9%;
+    box-shadow: var(--box-shadow);
+}
+
+
+

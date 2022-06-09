@@ -1,0 +1,36 @@
+.productos{
+    display: list-item;
+    justify-content: space-between;
+    top:0; left:0; right:0;
+}
+
+.productosh1 {
+    position: relative;
+    margin-top: 4rem;
+    text-align: center;
+    color: #000000;
+    font-size: 40px;
+}
+
+.login-form-container{
+    position: fixed;
+    top:-105%; left:0;
+    height:100%;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:rgba(255,255,255,.9);
+    z-index: 10000;
+}
+
+.btn{
+    display: inline-block;
+    margin-top: 3rem;
+    padding:.8rem 3rem;
+    font-size: 1rem;
+    border-radius: .4rem;
+    font-weight: 200;
+    color:var(--light-color);
+    text-align: center;
+}
