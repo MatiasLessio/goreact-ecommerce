@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from "react";
 import { ObjectProducto } from "../productos/ObjectProducto";
-import { ObjectCategories } from "../categorias/ObjectCategories";
+import { ObjectCategories } from "./ObjectCategories";
 import "./Home-css.css"
 
 //import { Cookies } from "react-cookie";

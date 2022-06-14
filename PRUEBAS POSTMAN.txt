@@ -13,3 +13,10 @@ INSERT ORDER http://localhost:8090/neworder
         }
     ]
 }
+
+http://localhost:8090/login
+{
+    "user": "matiaslessio",
+    "password": "mati123"
+}
+

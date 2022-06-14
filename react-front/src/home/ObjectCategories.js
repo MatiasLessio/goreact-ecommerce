@@ -6,8 +6,8 @@ export const ObjectCategories =(
     description
 })=>{
     return(
-        <div className="categoria">
-        <div className="categoria_footer">
+        <div>
+        <div>
             <h1>{name}</h1>
             <p>{description}</p>
         </div>

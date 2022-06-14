@@ -15,30 +15,30 @@ func mapUrls() {
 	// Users Mapping
 	router.GET("/user/:id", userController.GetUserById)
 	router.GET("/user", userController.GetUsers)
-	router.POST("/login", userController.LoginUser) //hay que ver como lo hacemos bien
+	router.POST("/login", userController.LoginUser) //login del user
 
-	//Address Mapping
+	//Address Mapping (se podrian quitar)
 	router.GET("/address/:id", addressController.GetAddressById)
 	router.GET("/address", addressController.GetAddresses)
 
 	//Category Mapping
 	router.GET("/category/:id", categoryController.GetCategoryById)
-	router.GET("/categories", categoryController.GetCategories)
+	router.GET("/categories", categoryController.GetCategories) //muestra todas las categorias
 
 	//Order Mapping
 	router.GET("/order/:id", orderController.GetOrderById)
 	router.GET("/orders", orderController.GetOrders)
-	router.POST("/neworder", orderController.OrderInsert)
-	router.GET("/orderUser/:idUser", orderController.GetOrdersByIdUser)
+	router.POST("/neworder", orderController.OrderInsert) //insert order
+	router.GET("/order/user/:id", orderController.GetOrdersByIdUser)
 
 	//OrderDetail Mapping
 	router.GET("/orderDetail/:id", orderDetailController.GetOrderDetailById)
-	router.GET("/orderDetail", orderDetailController.GetOrderDetails)
+	router.GET("/orderDetails", orderDetailController.GetOrderDetails)
 
 	//Product Mapping
 	router.GET("/product/:id", productController.GetProductById)
-	router.GET("/products", productController.GetProducts)
-	router.GET("/product/category/:id", productController.GetProductsByIdCategory)
+	router.GET("/products", productController.GetProducts)                         //muestra todos los productos
+	router.GET("/product/category/:id", productController.GetProductsByIdCategory) //muestra los productos de una categoria
 
 	log.Info("Finishing mappings configurations")
 }
