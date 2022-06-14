@@ -2,7 +2,7 @@ package services
 
 
 import (
-	addressCliente "mvc-go/clients/address" 
+	addressClient "mvc-go/clients/address" 
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -25,7 +25,7 @@ func init() {
 
 func (s *addressService) GetAddressById(id int) (dto.AddressDto, e.ApiError) {
 
-	var address model.Address = addressCliente.GetAddressById(id) 
+	var address model.Address = addressClient.GetAddressById(id) 
 	var addressDto dto.AddressDto
 
 	if address.Id == 0 {
@@ -41,7 +41,7 @@ func (s *addressService) GetAddressById(id int) (dto.AddressDto, e.ApiError) {
 
 func (s *addressService) GetAddresses() (dto.AddressesDto, e.ApiError) {
 
-	var addresses model.Addresses = addressCliente.GetAddresses()
+	var addresses model.Addresses = addressClient.GetAddresses()
 	var addressesDto dto.AddressesDto
 
 	for _, address := range addresses {

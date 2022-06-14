@@ -1,7 +1,7 @@
 package services
 
 import (
-	userCliente "mvc-go/clients/user"
+	userClient "mvc-go/clients/user"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -27,12 +27,12 @@ func init() {
 	UserService = &userService{}
 }
 
-var jwtKey = []byte("secret_key")
 
+var jwtKey = []byte("secret_key")
 func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError) {
 
 	log.Debug(loginDto)
-	var user model.User = userCliente.GetUserByUserName(loginDto.User, loginDto.Password)
+	var user model.User = userClient.GetUserByUserName(loginDto.User, loginDto.Password)
 	var tokenDto dto.TokenDto
 
 	if user.Id == 0 {
@@ -49,7 +49,7 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError
 
 func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
 
-	var user model.User = userCliente.GetUserById(id)
+	var user model.User = userClient.GetUserById(id)
 	var userDto dto.UserDto
 
 	if user.Id == 0 {
@@ -66,7 +66,7 @@ func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {
 
 func (s *userService) GetUsers() (dto.UsersDto, e.ApiError) {
 
-	var users model.Users = userCliente.GetUsers()
+	var users model.Users = userClient.GetUsers()
 	var usersDto dto.UsersDto
 
 	for _, user := range users {

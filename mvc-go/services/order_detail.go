@@ -1,7 +1,7 @@
 package services
 
 import (
-	orderDetailCliente "mvc-go/clients/order_detail"
+	orderDetailClient "mvc-go/clients/order_detail"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -26,7 +26,7 @@ func init() {
 //get by id
 func (s *orderDetailService) GetOrderDetailById(id int) (dto.OrderDetailDto, e.ApiError) {
 
-	var orderDetail model.OrderDetail = orderDetailCliente.GetOrderDetailById(id)
+	var orderDetail model.OrderDetail = orderDetailClient.GetOrderDetailById(id)
 	var orderDetailDto dto.OrderDetailDto
 
 	if orderDetail.Id == 0 {
@@ -44,7 +44,7 @@ func (s *orderDetailService) GetOrderDetailById(id int) (dto.OrderDetailDto, e.A
 //get array de detalles
 func (s *orderDetailService) GetOrderDetails() (dto.OrderDetailsDto, e.ApiError) {
 
-	var orderDetails model.OrderDetails = orderDetailCliente.GetOrderDetails()
+	var orderDetails model.OrderDetails = orderDetailClient.GetOrderDetails()
 	var orderDetailsDto dto.OrderDetailsDto
 
 	for _, orderDetail := range orderDetails {
@@ -65,7 +65,7 @@ func (s *orderDetailService) GetOrderDetails() (dto.OrderDetailsDto, e.ApiError)
 //devuelve el detalle gracias al id de la order
 func (s *orderDetailService) GetOrderDetailByIdOrder(id_Order int) (dto.OrderDetailsDto, e.ApiError) {
 
-	var ordersDetail model.OrderDetails = orderDetailCliente.GetOrderDetailByIdOrder(id_Order)
+	var ordersDetail model.OrderDetails = orderDetailClient.GetOrderDetailByIdOrder(id_Order)
 	var ordersDetailDto dto.OrderDetailsDto
 
 	for _, orderDetail := range ordersDetail {

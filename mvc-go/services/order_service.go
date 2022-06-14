@@ -1,9 +1,9 @@
 package services
 
 import (
-	orderCliente "mvc-go/clients/order"
-	orderDetailCliente "mvc-go/clients/order_detail"
-	productCliente "mvc-go/clients/product"
+	orderClient "mvc-go/clients/order"
+	orderDetailClient "mvc-go/clients/order_detail"
+	productClient "mvc-go/clients/product"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -29,7 +29,7 @@ func init() {
 
 func (s *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
 
-	var order model.Order = orderCliente.GetOrderById(id)
+	var order model.Order = orderClient.GetOrderById(id)
 	var orderDto dto.OrderDto
 
 	if order.Id == 0 {
@@ -45,7 +45,7 @@ func (s *orderService) GetOrderById(id int) (dto.OrderDto, e.ApiError) {
 
 func (s *orderService) GetOrders() (dto.OrdersDto, e.ApiError) {
 
-	var orders model.Orders = orderCliente.GetOrders()
+	var orders model.Orders = orderClient.GetOrders()
 	var ordersDto dto.OrdersDto
 
 	for _, order := range orders {
@@ -69,7 +69,7 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 	order.Fecha = time.Now()
 	order.Id_User = orderDto.Id_Usuario
 
-	order = orderCliente.InsertOrder(order)
+	order = orderClient.InsertOrder(order)
 
 	var details model.OrderDetails
 	var total float32
@@ -79,7 +79,7 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 		var detail model.OrderDetail
 		detail.Id_Product = detailDto.Id_Producto
 
-		var product model.Product = productCliente.GetProductById(detail.Id_Product)
+		var product model.Product = productClient.GetProductById(detail.Id_Product)
 		detail.Precio_Unitario = product.Price
 		detail.Cantidad = detailDto.Cantidad
 		detail.Total = detail.Precio_Unitario * detail.Cantidad
@@ -91,9 +91,9 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 		details = append(details, detail)
 	}
 
-	orderCliente.UpdateMontoFinal(total, order.Id)
+	orderClient.UpdateMontoFinal(total, order.Id)
 
-	orderDetailCliente.InsertOrdersDetail(details)
+	orderDetailClient.InsertOrdersDetail(details)
 
 	return orderDto, nil
 }
@@ -101,9 +101,11 @@ func (s *orderService) InsertOrder(orderDto dto.OrderDto) (dto.OrderDto, e.ApiEr
 //get de orders por el id del cliente
 func (s *orderService) GetOrdersByIdUser(id_User int) (dto.OrdersDto, e.ApiError) {
 
-	var orders model.Orders = orderCliente.GetOrdersByIdUser(id_User)
+	var orders model.Orders = orderClient.GetOrdersByIdUser(id_User)
 	var ordersDto dto.OrdersDto
-
+	if len(orders) == 0 {
+		return ordersDto, e.NewBadRequestApiError("order not found")
+	}
 	for _, order := range orders {
 		var orderDto dto.OrderDto
 

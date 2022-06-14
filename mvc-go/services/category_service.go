@@ -1,7 +1,7 @@
 package services
 
 import (
-	categoryCliente "mvc-go/clients/category"
+	categoryClient "mvc-go/clients/category"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -24,7 +24,7 @@ func init() {
 
 func (s *categoryService) GetCategoryById(id int) (dto.CategoryDto, e.ApiError) {
 
-	var category model.Category = categoryCliente.GetCategoryById(id)
+	var category model.Category = categoryClient.GetCategoryById(id)
 	var categoryDto dto.CategoryDto
 
 	if category.Id == 0 {
@@ -38,8 +38,12 @@ func (s *categoryService) GetCategoryById(id int) (dto.CategoryDto, e.ApiError) 
 
 func (s *categoryService) GetCategories() (dto.CategoriesDto, e.ApiError) {
 
-	var categories model.Categories = categoryCliente.GetCategories()
+	var categories model.Categories = categoryClient.GetCategories()
 	var categoriesDto dto.CategoriesDto
+
+	if len(categories) == 0 {
+		return categoriesDto, e.NewBadRequestApiError("categories not found")
+	}
 
 	for _, category := range categories {
 		var categoryDto dto.CategoryDto
