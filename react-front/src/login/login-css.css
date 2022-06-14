@@ -32,6 +32,7 @@ body{
 .btn{
     display: inline-block;
     margin-top: 3rem;
+    margin: 0.3rem;
     padding:.8rem 3rem;
     font-size: 1rem;
     border-radius: .4rem;
@@ -42,6 +43,8 @@ body{
 button {
     margin: 20px;
     outline: none;
+    text-align: center;
+    align-self: center;
   }
 .buttons {
     width: 130px;
