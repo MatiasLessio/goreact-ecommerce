@@ -18,7 +18,7 @@ func GetProductById(id int) model.Product {
 	return product
 }
 
-func GetProductsByIdCategory(id_Category int) model.Products {
+func GetProductsByIdCategory(id_Category int) model.Products { //SELECT * from products WHERE id_category = x;
 	var products model.Products
 	log.Debug("id_category: ", id_Category)
 	Db.Where("id_category = ?", id_Category).Find(&products)

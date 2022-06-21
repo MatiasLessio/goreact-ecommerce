@@ -4,9 +4,9 @@ import "./Productos.css"
 
 export const Productos = ()=>{
 
-    const [productos, setProductos] = useState([]);
-    const [prodsearch, setProdsearch] = useState([]);
-    const [busqueda, setBusqueda]= useState("");
+    const [productos, setProductos] = useState([]); //almacena la tabla de forma estatica
+    const [prodsearch, setProdsearch] = useState([]); //almacena los datos que va dando la busqueda
+    const [busqueda, setBusqueda]= useState(""); //controla lo que se escribe en la barra de busqueda
     const fetchApi = async()=>{
     const response = await fetch('http://localhost:8090/products')
     .then((response) => response.json());
@@ -18,17 +18,17 @@ export const Productos = ()=>{
     },[])
 
     const handleChange=e=>{
-        setBusqueda(e.target.value);
-        filtrar(e.target.value);
+        setBusqueda(e.target.value); //aca se almacena la busqueda
+        filtrar(e.target.value); //filtra
       }
-      const filtrar=(terminoBusqueda)=>{
+      const filtrar=(terminoBusqueda)=>{ //recibe como parametro el termino de busqueda
         var resultadosBusqueda=prodsearch.filter((elemento)=>{
-          if(elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase()))
+          if(elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) //aca hace que sin importar lo que ingrese, se pueda filtrar
           {
-            return elemento;
+            return elemento; //si coincide todo, devuelve el elemento
           }
         });
-        setProductos(resultadosBusqueda);
+        setProductos(resultadosBusqueda); //si coincide todo lo guardamos en el estado productos
       }
 
     return(

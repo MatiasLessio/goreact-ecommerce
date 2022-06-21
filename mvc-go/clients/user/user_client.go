@@ -18,7 +18,7 @@ func GetUserById(id int) model.User {
 	return user
 }
 
-func GetUsers() model.Users {
+func GetUsers() model.Users { // SELECT * FROM USERS;
 	var users model.Users
 	Db.Find(&users)
 

@@ -14,12 +14,12 @@ import (
 func mapUrls() {
 	// Users Mapping
 	router.GET("/user/:id", userController.GetUserById)
-	router.GET("/user", userController.GetUsers)
+	router.GET("/users", userController.GetUsers)
 	router.POST("/login", userController.LoginUser) //login del user
 
 	//Address Mapping (se podrian quitar)
 	router.GET("/address/:id", addressController.GetAddressById)
-	router.GET("/address", addressController.GetAddresses)
+	router.GET("/addresses", addressController.GetAddresses)
 
 	//Category Mapping
 	router.GET("/category/:id", categoryController.GetCategoryById)

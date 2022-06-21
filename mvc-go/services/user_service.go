@@ -27,8 +27,8 @@ func init() {
 	UserService = &userService{}
 }
 
-
 var jwtKey = []byte("secret_key")
+
 func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError) {
 
 	log.Debug(loginDto)

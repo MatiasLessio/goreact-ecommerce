@@ -112,6 +112,7 @@ func (s *orderService) GetOrdersByIdUser(id_User int) (dto.OrdersDto, e.ApiError
 		orderDto.Id = order.Id
 		orderDto.Fecha = order.Fecha
 		orderDto.Monto_Final = order.Monto_Final
+		orderDto.Id_Usuario = order.Id_User
 
 		ordersDto = append(ordersDto, orderDto)
 	}
