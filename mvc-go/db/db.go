@@ -24,7 +24,7 @@ func init() {
 	DBName := "mvc_go"
 	DBUser := "root"
 	DBPass := "rootroot"
-	DBHost := "127.0.0.1"
+	DBHost := "mvc_go"
 	// ------------------------
 
 	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")

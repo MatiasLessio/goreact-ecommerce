@@ -6,9 +6,8 @@ import (
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/golang-jwt/jwt"
+	log "github.com/sirupsen/logrus"
 )
 
 type userService struct{}
@@ -30,21 +29,28 @@ func init() {
 var jwtKey = []byte("secret_key")
 
 func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.TokenDto, e.ApiError) {
-
+	var user model.User = userClient.GetUserByUserName(loginDto.User)
 	log.Debug(loginDto)
-	var user model.User = userClient.GetUserByUserName(loginDto.User, loginDto.Password)
+
 	var tokenDto dto.TokenDto
 
 	if user.Id == 0 {
 		return tokenDto, e.NewBadRequestApiError("user not found")
 	}
 
-	if user.Password == loginDto.Password {
-		token := jwt.New(jwt.SigningMethodHS256)
+	if loginDto.Password == user.Password {
+		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+			"id_user": user.Id,
+		})
 		tokenString, _ := token.SignedString(jwtKey)
 		tokenDto.Token = tokenString
+		tokenDto.Id_user = user.Id
+
+		return tokenDto, nil
+	} else {
+		return tokenDto, e.NewBadRequestApiError("contraseña incorrecta")
 	}
-	return tokenDto, nil
+
 }
 
 func (s *userService) GetUserById(id int) (dto.UserDto, e.ApiError) {

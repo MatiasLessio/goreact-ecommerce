@@ -18,7 +18,7 @@ func GetUserById(id int) model.User {
 	return user
 }
 
-func GetUsers() model.Users { // SELECT * FROM USERS;
+func GetUsers() model.Users {
 	var users model.Users
 	Db.Find(&users)
 
@@ -27,10 +27,10 @@ func GetUsers() model.Users { // SELECT * FROM USERS;
 	return users
 }
 
-func GetUserByUserName(userName string, password string) model.User {
+func GetUserByUserName(userName string) model.User {
 	var user model.User
 
-	Db.Where("user_name = ? AND password = ?", userName, password).First(&user)
+	Db.Where("user_name = ?", userName).First(&user)
 	log.Debug("User: ", user)
 
 	return user

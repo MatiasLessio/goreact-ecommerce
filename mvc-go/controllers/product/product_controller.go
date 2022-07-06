@@ -36,7 +36,6 @@ func GetProducts(c *gin.Context) {
 
 	c.JSON(http.StatusOK, productsDto)
 }
-
 func GetProductsByIdCategory(c *gin.Context) {
 	log.Debug("Product id to load: " + c.Param("id"))
 

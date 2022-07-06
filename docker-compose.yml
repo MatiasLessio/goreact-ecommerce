@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  mvc_go:
+    build: ./db
+    environment:
+      MYSQL_DATABASE: mvc_go
+      MYSQL_ROOT_PASSWORD: rootroot
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root","-p rootroot"]
+      timeout: 20s
+      retries: 10
+  front:
+    build: ./React-Front
+    depends_on:
+      mvc_go:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+  back:
+    build: ./mvc-go
+    restart: on-failure
+    depends_on:
+      mvc_go:
+        condition: service_healthy
+    ports:
+      - "8090:8090"

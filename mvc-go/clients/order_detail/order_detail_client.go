@@ -34,6 +34,11 @@ func InsertOrderDetail(orderDetail model.OrderDetail) model.OrderDetail {
 		log.Error("")
 	}
 	log.Debug("OrderDetail Created: ", orderDetail.Id)
+	result1 := Db.Model(&model.Product{}).Where("id = ?", orderDetail.Id_Product).Update("stock", gorm.Expr("stock - ? ", orderDetail.Cantidad))
+
+	if result1.Error != nil {
+		log.Error("Producto no encontrado")
+	}
 	return orderDetail
 }
 
@@ -51,10 +56,14 @@ func InsertOrdersDetail(ordersDetail model.OrderDetails) model.OrderDetails {
 
 		result := Db.Create(&orderDetail)
 
-		log.Debug("Order_Detail Created: ", orderDetail.Id)
-
 		if result.Error != nil {
-			log.Error("")
+			log.Error("Error al crear")
+		}
+
+		log.Debug("Order_Detail Created: ", orderDetail.Id)
+		result1 := Db.Model(&model.Product{}).Where("id = ?", orderDetail.Id_Product).Update("stock", gorm.Expr("stock - ? ", orderDetail.Cantidad))
+		if result1.Error != nil {
+			log.Error("Producto no encontrado")
 		}
 	}
 

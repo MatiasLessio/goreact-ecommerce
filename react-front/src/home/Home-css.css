@@ -4,3 +4,11 @@
     color: #000000;
     font-size: 50px;
 }
+
+
+.cats:hover{
+    color:rgb(0, 0, 0);
+    background:var(--yellow);
+    transform: scale(.9);
+
+}

@@ -1,2 +1,4 @@
 
 app-test/node_modules/*
+db.go
+react-front-errores/*

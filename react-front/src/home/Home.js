@@ -58,7 +58,7 @@ const Render =(
         <div>
             {
                 categorias.map(categoria =>(
-                  <button onClick={()=>Handle(categoria.id_category)}>
+                  <button class="cats" onClick={()=>Handle(categoria.id_category)}>
                       <ObjectCategories key={categoria.id_category}
                       
                   name={categoria.nombre}

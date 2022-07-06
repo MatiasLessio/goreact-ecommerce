@@ -1,7 +1,7 @@
 package services
 
 import (
-	productClient "mvc-go/clients/product"
+	productCliente "mvc-go/clients/product"
 	"mvc-go/dto"
 	"mvc-go/model"
 	e "mvc-go/utils/errors"
@@ -25,7 +25,7 @@ func init() {
 
 func (s *productService) GetProductById(id int) (dto.ProductDto, e.ApiError) {
 
-	var product model.Product = productClient.GetProductById(id)
+	var product model.Product = productCliente.GetProductById(id)
 	var productDto dto.ProductDto
 
 	if product.Id == 0 {
@@ -40,15 +40,10 @@ func (s *productService) GetProductById(id int) (dto.ProductDto, e.ApiError) {
 	return productDto, nil
 }
 
-//muestra solo los productos de la categoria solicitada
 func (s *productService) GetProductsByIdCategory(id_Category int) (dto.ProductsDto, e.ApiError) {
 
-	var products model.Products = productClient.GetProductsByIdCategory(id_Category)
+	var products model.Products = productCliente.GetProductsByIdCategory(id_Category)
 	var productsDto dto.ProductsDto
-
-	if len(products) == 0 {
-		return productsDto, e.NewBadRequestApiError("products not found")
-	}
 
 	for _, product := range products {
 		var productDto dto.ProductDto
@@ -65,15 +60,10 @@ func (s *productService) GetProductsByIdCategory(id_Category int) (dto.ProductsD
 	return productsDto, nil
 }
 
-//muestra todos los productos
 func (s *productService) GetProducts() (dto.ProductsDto, e.ApiError) {
 
-	var products model.Products = productClient.GetProducts()
+	var products model.Products = productCliente.GetProducts()
 	var productsDto dto.ProductsDto
-
-	if len(products) == 0 {
-		return productsDto, e.NewBadRequestApiError("products not found")
-	}
 
 	for _, product := range products {
 		var productDto dto.ProductDto

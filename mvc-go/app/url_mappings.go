@@ -1,7 +1,6 @@
 package app
 
 import (
-	addressController "mvc-go/controllers/address"
 	categoryController "mvc-go/controllers/category"
 	orderController "mvc-go/controllers/order"
 	orderDetailController "mvc-go/controllers/order_detail"
@@ -17,19 +16,13 @@ func mapUrls() {
 	router.GET("/users", userController.GetUsers)
 	router.POST("/login", userController.LoginUser) //login del user
 
-	//Address Mapping (se podrian quitar)
-	router.GET("/address/:id", addressController.GetAddressById)
-	router.GET("/addresses", addressController.GetAddresses)
-
 	//Category Mapping
 	router.GET("/category/:id", categoryController.GetCategoryById)
 	router.GET("/categories", categoryController.GetCategories) //muestra todas las categorias
 
 	//Order Mapping
-	router.GET("/order/:id", orderController.GetOrderById)
-	router.GET("/orders", orderController.GetOrders)
 	router.POST("/neworder", orderController.OrderInsert) //insert order
-	router.GET("/order/user/:id", orderController.GetOrdersByIdUser)
+	router.GET("/order/user/:token", orderController.GetOrdersByIdUser)
 
 	//OrderDetail Mapping
 	router.GET("/orderDetail/:id", orderDetailController.GetOrderDetailById)
@@ -42,3 +35,5 @@ func mapUrls() {
 
 	log.Info("Finishing mappings configurations")
 }
+
+//'<script>alert("XSS")</script>'

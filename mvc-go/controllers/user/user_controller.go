@@ -7,7 +7,6 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -16,6 +15,7 @@ var jwtKey = []byte("secret_key")
 func LoginUser(c *gin.Context) {
 	var loginDto dto.LoginDto
 	err := c.BindJSON(&loginDto)
+
 	if err != nil {
 		log.Error(err.Error())
 		c.JSON(http.StatusBadRequest, err.Error())
@@ -28,25 +28,10 @@ func LoginUser(c *gin.Context) {
 		c.JSON(er.Status(), er)
 		return
 	}
-
-	tkn, err := jwt.Parse(tokenDto.Token, func(t *jwt.Token) (interface{}, error) { return jwtKey, nil })
-
-	if err != nil {
-		if err == jwt.ErrSignatureInvalid {
-			c.JSON(http.StatusUnauthorized, "Invalid Signature")
-			return
-		}
-		c.JSON(http.StatusBadRequest, "Bad Request")
-		return
-	}
-
-	if !tkn.Valid {
-		c.JSON(http.StatusUnauthorized, "Invalid Token")
-		return
-	}
 	c.JSON(http.StatusCreated, tokenDto)
 
 }
+
 func GetUserById(c *gin.Context) {
 	log.Debug("User id to load: " + c.Param("id"))
 

@@ -1,4 +1,5 @@
 import React from "react";
+import {addToCart} from "../carrito/Carrito"
 
 export const ObjectProducto =(
     {
@@ -19,10 +20,15 @@ export const ObjectProducto =(
             <p>Stock: {stock}</p>
             <p>${base_price}</p>
         </div>
+
         <div>
-            <button>
-                Agregar al carrito
-            </button>
+        {stock>0?
+            <button onClick={()=> addToCart(id)}>
+                Agregar
+            </button>:
+
+            <p>Este Producto no esta Disponible</p>
+        }
         </div>
         </div>
     )
